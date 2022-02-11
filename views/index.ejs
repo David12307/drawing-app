@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title><%= title %></title>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.5/dist/html2canvas.min.js"></script>
+    <style>
+        .square {
+            width: 10px;
+            height: 10px;
+        }
+
+        #table {
+            width: 830px;
+            height: 519px;
+            display: grid;
+            grid-column-gap: 10px;
+            grid-row-gap: 10px;
+            grid-template-rows: 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px;
+            grid-template-columns: 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px 0px;
+            border: 1px solid black;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: white;
+            background-color: #222831;
+        }
+
+        #table {
+            background-color: white;
+        }
+
+        select {
+            position: absolute;
+            left: 72.5%;
+            margin-top: 1%;
+        }
+
+        #ssButton {
+            position: absolute;
+            border: 0px;
+            color: #F05454;
+            background-color: #222831;
+            margin-top: 1%;
+            left: 22.5%;
+            cursor: pointer;
+        }
+
+        #ssButton:hover {
+            border-bottom: 1px solid #F05454;
+        }
+
+        #users-list {
+            position: absolute;
+            margin-top: 3%;
+            left: 22.5%;
+        }
+
+        .ss {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            top: 15%;
+            left: 2%;
+        }
+
+        #leaveButton {
+            position: absolute;
+            background-color: #F05454;
+            color: white;
+            padding: 10px 20px 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 6%;
+            left: 46%;
+        }
+
+
+    </style>
+        
+</head>
+<body>
+
+    <div id="output">
+    </div>
+
+    <center>
+        <div id="table"></div>
+    </center>
+
+    <button onclick="takeShot()" id="ssButton">(Take Screenshot)</button>
+
+    <select id="color">
+        <option value="red">Red</option>
+        <option value="brown">Brown</option>
+        <option value="green">Green</option>
+        <option value="blue">Blue</option>
+        <option value="white">Eraser</option>
+    </select>
+
+    <h3 id="users-list"></h3>
+
+    <a id="leaveButton" href="/">LEAVE</a>
+
+    <script>
+        const socket = io('http://localhost:3000/');
+        var table = document.getElementById('table');
+        var color = document.getElementById('color');
+        var usersList = document.getElementById('users-list');
+
+        function takeShot() {
+            html2canvas(table)
+             .then(canvas => {
+                canvas.style.display = 'none';
+                document.getElementById('output').appendChild(canvas);
+                return canvas;
+             })
+             .then(canvas => {
+                const image = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
+                const a = document.createElement('a');
+                a.setAttribute('download', 'my-image.png');
+                a.setAttribute('href', image);
+                a.click()
+                canvas.remove();
+             })
+        }
+
+        function createBoard() {
+            for (i = 0; i < 4320; i++) {
+                var div = document.createElement('div');
+                div.classList.add('square');
+                div.setAttribute('id', i);
+                table.appendChild(div);
+            }
+
+            $('.square').on('click', function () {
+                this.style.backgroundColor = color.value;
+                socket.emit('draw-square', this.id, color.value);
+            }); 
+        }
+
+        socket.on('draw', (id, color) => {
+            $(`#${id}`).css("background-color", color);
+        });
+
+        socket.on('render', () => {
+            createBoard();
+        });
+
+        socket.on('update-users', (users) => {
+            alert('A new user joined!');
+            usersList.textContent = 'Users connected: ' + users;
+        });
+
+        
+        socket.on('connect', () => {
+            console.log(socket.id);
+        });
+    </script>
+    
+</body>
+</html>
