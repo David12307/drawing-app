@@ -1,5 +1,5 @@
 # A collaborative drawing app
- - Libraries used:
+  Libraries used:
   * Express
   * Mongoose (for login/register)
   * EJS
