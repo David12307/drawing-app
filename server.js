@@ -10,7 +10,7 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({extended: false}));
 
 // Connect database
-var dbURI = "mongodb+srv://davidd:okiokioki123@cluster0.psmuv.mongodb.net/drawing?retryWrites=true&w=majority"
+var dbURI = "nice try"
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
  .then(result => {
     server.listen(3000, () => {
